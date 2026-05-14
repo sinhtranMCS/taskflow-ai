@@ -389,26 +389,52 @@ input::placeholder, textarea::placeholder {
 .chart-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; }
 
 /* Task Board (Kanban) */
-.board-container { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 16px; min-height: 60vh; }
+.board-container {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 12px;
+  min-height: 60vh;
+  scroll-snap-type: x proximity;
+  scrollbar-color: var(--border-subtle) transparent;
+  scrollbar-width: thin;
+}
+.board-container::-webkit-scrollbar { height: 10px; }
+.board-container::-webkit-scrollbar-track { background: transparent; }
+.board-container::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 999px;
+}
+.board-container::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 .board-column {
-  min-width: 300px;
-  max-width: 340px;
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 320px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - 200px);
+  scroll-snap-align: start;
+}
+
+@media (min-width: 1440px) {
+  .board-column { max-width: none; }
 }
 
 .column-header {
-  padding: 16px 20px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  background: var(--bg-secondary);
+  z-index: 1;
 }
 
 .column-title {
@@ -444,11 +470,12 @@ input::placeholder, textarea::placeholder {
 
 .column-tasks {
   flex: 1;
-  padding: 12px;
+  padding: 10px 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
+  min-height: 0;
 }
 
 /* Task Card */
