@@ -88,7 +88,7 @@ export default function AIAssistant() {
       <div className="main-header">
         <div className="header-left">
           <h2>AI Assistant</h2>
-          <p>Generate explainable task breakdowns and discuss delivery risk in interviews.</p>
+          <p>Generate explainable task breakdowns and discuss delivery risk across active projects.</p>
         </div>
       </div>
 
@@ -100,7 +100,7 @@ export default function AIAssistant() {
             <div className="eyebrow"><Sparkles size={14} /> Planning Assistant</div>
             <h3>Turn a product goal into scoped work</h3>
             <p className="panel-copy">
-              The backend uses explainable heuristics, not a hidden black box, so the output is deterministic and easy to defend during an interview.
+              The backend uses explainable heuristics, not a hidden black box, so the output is deterministic, auditable, and easy to review with stakeholders.
             </p>
 
             <div className="form-group">

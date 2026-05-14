@@ -114,14 +114,14 @@ describe('aiService.generateTaskBreakdown', () => {
       projectName: 'Acme',
     });
 
-    expect(tasks).toHaveLength(5);
+    expect(tasks).toHaveLength(7);
     expect(tasks[0].title.toLowerCase()).toMatch(/auth|secure|login/);
   });
 
   it('falls back to a generic breakdown for an unknown goal', () => {
     const tasks = generateTaskBreakdown({ goal: 'Improve onboarding tour', projectName: 'Acme' });
 
-    expect(tasks).toHaveLength(5);
+    expect(tasks).toHaveLength(7);
     expect(tasks[0].confidence).toBeGreaterThan(0);
     expect(tasks[0].confidence).toBeLessThanOrEqual(1);
   });

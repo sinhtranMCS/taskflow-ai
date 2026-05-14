@@ -161,13 +161,20 @@ export default function Tasks() {
           <button className="btn btn-primary" onClick={() => setShowModal(true)}><Plus size={18} /> Add Task</button>
         </div>
       </div>
-      <div className="page-content">
-        {demoMode && <div className="notice-banner">Showing sample tasks because the API is not reachable.</div>}
-
-        <div className="search-input toolbar-search">
-          <Search />
-          <input placeholder="Search tasks..." value={search} onChange={(event) => setSearch(event.target.value)} />
+      <div className="page-content tasks-page">
+        <div className="tasks-toolbar">
+          <div className="search-input board-search">
+            <Search />
+            <input placeholder="Search tasks..." value={search} onChange={(event) => setSearch(event.target.value)} />
+          </div>
+          <div className="board-summary">
+            <span>{filtered.length} shown</span>
+            <span>{COLUMNS.length} columns</span>
+            {demoMode && <span className="demo-pill">Demo data</span>}
+          </div>
         </div>
+
+        {demoMode && <div className="notice-banner compact">Showing sample tasks because the API is not reachable.</div>}
 
         <div className="board-container">
           {COLUMNS.map((column) => {
@@ -191,6 +198,7 @@ export default function Tasks() {
                     <motion.div
                       key={task._id}
                       className="task-card"
+                      style={{ '--task-color': task.project?.color || 'var(--accent)' }}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.03 }}
@@ -198,8 +206,8 @@ export default function Tasks() {
                       onDragStart={(event) => event.dataTransfer.setData('taskId', task._id)}
                     >
                       {task.project?.name && (
-                        <div className="task-project-label" style={{ color: task.project.color || 'var(--accent)' }}>
-                          <span style={{ background: task.project.color || 'var(--accent)' }} />
+                        <div className="task-project-label">
+                          <span />
                           {task.project.name}
                         </div>
                       )}

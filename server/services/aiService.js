@@ -229,32 +229,80 @@ const buildAiInsights = ({ projects, tasks }) => {
 const keywordProfiles = [
   {
     test: /(auth|login|user|account|security)/i,
-    tasks: ['Define auth requirements', 'Design secure login flow', 'Build API endpoints', 'Add validation and rate limits', 'Write auth test cases'],
+    tasks: [
+      'Define auth requirements',
+      'Design secure login flow',
+      'Build API endpoints',
+      'Add validation and rate limits',
+      'Connect audit logging',
+      'Review access-control edge cases',
+      'Write auth test cases',
+    ],
   },
   {
     test: /(payment|checkout|stripe|billing|invoice)/i,
-    tasks: ['Map checkout states', 'Create payment intent API', 'Build checkout UI', 'Handle webhooks and failures', 'Test payment edge cases'],
+    tasks: [
+      'Map checkout states',
+      'Create payment intent API',
+      'Build checkout UI',
+      'Handle webhooks and failures',
+      'Add reconciliation view',
+      'Document payment runbook',
+      'Test payment edge cases',
+    ],
   },
   {
     test: /(analytics|dashboard|report|chart|metric)/i,
-    tasks: ['Define KPI model', 'Create aggregation endpoint', 'Build chart components', 'Add filters and date ranges', 'Validate dashboard data'],
+    tasks: [
+      'Define KPI model',
+      'Create aggregation endpoint',
+      'Build chart components',
+      'Add filters and date ranges',
+      'Add drill-down states',
+      'Write analytics QA checklist',
+      'Validate dashboard data',
+    ],
   },
   {
     test: /(ai|assistant|recommend|predict|automation)/i,
-    tasks: ['Define AI use case and guardrails', 'Prepare feature signals', 'Build recommendation service', 'Design assistant UI', 'Evaluate output quality'],
+    tasks: [
+      'Define AI use case and guardrails',
+      'Prepare feature signals',
+      'Build recommendation service',
+      'Design assistant UI',
+      'Add feedback loop',
+      'Create monitoring dashboard',
+      'Evaluate output quality',
+    ],
   },
   {
     test: /(mobile|responsive|app|android|ios)/i,
-    tasks: ['Audit mobile layouts', 'Design touch interactions', 'Optimize responsive components', 'Test common devices', 'Polish accessibility states'],
+    tasks: [
+      'Audit mobile layouts',
+      'Design touch interactions',
+      'Optimize responsive components',
+      'Test common devices',
+      'Tune performance on low-end devices',
+      'Prepare app-store release checklist',
+      'Polish accessibility states',
+    ],
   },
 ];
 
-const defaultTasks = ['Clarify scope and acceptance criteria', 'Design user flow', 'Implement backend contract', 'Build frontend experience', 'Test and document the feature'];
+const defaultTasks = [
+  'Clarify scope and acceptance criteria',
+  'Design user flow',
+  'Implement backend contract',
+  'Build frontend experience',
+  'Define rollout plan',
+  'Create demo and documentation',
+  'Test and document the feature',
+];
 
 const generateTaskBreakdown = ({ goal, projectName }) => {
   const profile = keywordProfiles.find((item) => item.test.test(goal));
   const taskTitles = profile?.tasks || defaultTasks;
-  const priorities = ['high', 'high', 'medium', 'medium', 'low'];
+  const priorities = ['high', 'high', 'medium', 'medium', 'medium', 'low', 'low'];
 
   return taskTitles.map((title, index) => ({
     title,

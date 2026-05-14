@@ -62,7 +62,7 @@ export default function Dashboard() {
       <div className="page-content">
         {demoMode && (
           <div className="notice-banner">
-            API is unavailable, so this workspace is showing interview demo data. Start MongoDB and seed the database for live data.
+            API is unavailable, so this workspace is showing local demo data. Start MongoDB and seed the database for live data.
           </div>
         )}
 

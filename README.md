@@ -14,17 +14,21 @@
 
 ## Demo
 
-> Replace the placeholders below with real screenshots / GIFs once the app is running. Recommended captures: Dashboard, Projects, Kanban Board, AI Assistant.
+Screenshots below were captured in real API mode with MongoDB-backed data.
 
 | Dashboard | Kanban Board |
 | --- | --- |
-| _Add `docs/screenshots/dashboard.png`_ | _Add `docs/screenshots/board.png`_ |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Kanban Board](docs/screenshots/board.png) |
 
-| AI Assistant | Login |
+| Projects | AI Assistant |
 | --- | --- |
-| _Add `docs/screenshots/ai.png`_ | _Add `docs/screenshots/login.png`_ |
+| ![Projects](docs/screenshots/projects.png) | ![AI Assistant](docs/screenshots/ai.png) |
 
-Live demo: _Add deployment URL (Render / Railway / Fly.io) here_
+| Login |
+| --- |
+| ![Login](docs/screenshots/login.png) |
+
+Live demo: not deployed yet. Run locally with the Quick Start steps below.
 
 ---
 
@@ -139,6 +143,14 @@ cp .env.example .env
 cd server && npm run seed && cd ..
 ```
 
+For a non-destructive real-data setup that does not wipe MongoDB:
+
+```bash
+npm run prepare:real
+```
+
+This creates or reuses a real login, four production-style projects, and a richer task board through the live API.
+
 ### 4. Run the stack
 
 ```bash
@@ -158,6 +170,32 @@ Password: password123
 ```
 
 > The Login page also has a **"View Demo Workspace"** button that loads the frontend with mocked data — handy for showing the UI without a running backend.
+
+---
+
+## Real Mode Testing
+
+Use this flow when you want to prove the app is using MongoDB and the real API, not fallback demo data:
+
+```bash
+# 1. Make sure MongoDB is running on localhost:27017
+npm run dev
+
+# 2. In another terminal, prepare real data without wiping the database
+npm run prepare:real
+
+# 3. Run the API smoke test
+npm run test:smoke
+```
+
+Then open http://localhost:5173 and sign in with:
+
+```text
+Email:    alex@taskflow.ai
+Password: password123
+```
+
+Do not click **View Demo Workspace** for the real test. If the app is real-connected, the task board should not show the "sample tasks because the API is not reachable" banner.
 
 ---
 
@@ -203,6 +241,10 @@ npm run dev          # Run client + server concurrently
 npm run build        # Production build of the frontend
 npm start            # Start the API server only
 npm test             # Run the API test suite
+npm run prepare:real # Create real product data through the API
+npm run test:smoke   # Run real HTTP API smoke test against MongoDB
+npm run screenshots  # Refresh README screenshots from the local real-mode app
+npm run verify       # Run unit tests and frontend build
 npm run docker:up    # docker compose up -d
 npm run docker:down  # docker compose down
 ```
@@ -216,7 +258,7 @@ A few interesting problems I worked through while building this:
 1. **Designing an explainable AI layer.** Rather than calling an LLM and rendering its answer, I built a deterministic scoring engine (`server/services/aiService.js`). It combines due-date proximity, priority weights, assignee gaps, review-queue size, and per-member workload into a single health score with human-readable reasons. The trade-off: it cannot generalize like an LLM, but every recommendation is auditable and reproducible — exactly what a real PM tool needs.
 2. **Project-scoped real-time updates.** Broadcasting every change to every client is wasteful and leaks data across projects. I scoped Socket.io rooms per project (`project:<id>`) and have the React board subscribe only to the projects currently visible. The server emits `task-created`, `task-updated`, `task-status-changed`, and `task-deleted` events that the board reconciles into local state without a full refetch.
 3. **Server-side access control.** Hiding data on the client is not security. The middleware in `server/middleware/auth.js` validates the JWT, and every project / task controller checks ownership or membership before reading or mutating. Admins get a wider scope, regular users only see what they belong to.
-4. **Resilient demo mode.** Interview demos fail in embarrassing ways — Wi-Fi drops, the API container takes a moment to boot, Mongo isn't seeded. The frontend falls back to demo data on API failure and shows a visible banner so the reviewer is not misled into thinking it is live data.
+4. **Resilient demo mode.** Live product walkthroughs can fail in practical ways: Wi-Fi drops, the API container takes a moment to boot, or Mongo is not seeded. The frontend falls back to demo data on API failure and shows a visible banner so the reviewer is not misled into thinking it is live data.
 5. **One-command stack with Docker.** Three containers (Mongo, API, Nginx + client) wired together with a private bridge network, with `JWT_SECRET` enforced from the environment so the stack refuses to start with a missing secret.
 
 ---

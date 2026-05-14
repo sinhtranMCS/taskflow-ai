@@ -190,11 +190,27 @@ export const generateDemoTaskBreakdown = (goal, projectName = 'the selected proj
     confidence: 0.74,
   },
   {
+    title: 'Define rollout plan',
+    description: `Plan release steps, owner handoff, and rollback notes for ${projectName}.`,
+    status: 'backlog',
+    priority: 'medium',
+    estimatedHours: 3,
+    confidence: 0.72,
+  },
+  {
+    title: 'Create demo and documentation',
+    description: `Prepare a concise walkthrough and implementation notes for: ${goal}`,
+    status: 'backlog',
+    priority: 'low',
+    estimatedHours: 4,
+    confidence: 0.7,
+  },
+  {
     title: 'Test and document the feature',
     description: `Verify edge cases and write concise implementation notes for ${projectName}.`,
     status: 'backlog',
     priority: 'low',
     estimatedHours: 3,
-    confidence: 0.7,
+    confidence: 0.66,
   },
 ];

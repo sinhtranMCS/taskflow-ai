@@ -11,11 +11,16 @@
     "build": "cd client && npm run build",
     "start": "cd server && npm start",
     "test": "cd server && npm test",
+    "test:smoke": "node scripts/smoke-test.js",
+    "prepare:real": "node scripts/prepare-real-demo.js",
+    "screenshots": "node scripts/capture-screenshots.js",
+    "verify": "npm test && npm run build",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "puppeteer-core": "^24.43.1"
   },
   "engines": {
     "node": ">=18.0.0"
