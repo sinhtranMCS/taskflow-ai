@@ -66,34 +66,16 @@ I wanted a portfolio project that goes beyond a CRUD todo list and demonstrates 
 
 ## Architecture
 
-```text
-                  ┌──────────────────────┐
-                  │       Browser        │
-                  │  React + Vite (SPA)  │
-                  └──────────┬───────────┘
-                             │ HTTPS / WebSocket
-                             ▼
-                  ┌──────────────────────┐
-                  │   Nginx (Docker)     │
-                  │  static + /api proxy │
-                  └──────────┬───────────┘
-                             ▼
-            ┌──────────────────────────────────┐
-            │     Express API (Node.js)        │
-            │  ┌────────────────────────────┐  │
-            │  │ Routes  → Controllers      │  │
-            │  │ Middleware (auth/validate) │  │
-            │  │ Services (AI engine)       │  │
-            │  └────────────────────────────┘  │
-            │            Socket.io             │
-            └──────────────┬───────────────────┘
-                           ▼
-                  ┌────────────────────┐
-                  │     MongoDB        │
-                  │  users / projects  │
-                  │      / tasks       │
-                  └────────────────────┘
-```
+<p align="center">
+  <img src="docs/architecture.png" alt="TaskFlow AI architecture diagram" width="520" />
+</p>
+
+The browser talks to an Nginx container that serves the static React bundle and
+reverse-proxies `/api` and `/socket.io` to the Express service. The API layer is
+split into routes → controllers, with middleware for auth and validation and a
+dedicated services layer (where the deterministic AI engine lives). Express
+holds the Socket.io server that pushes project-scoped events back to the
+browser. MongoDB stores users, projects, and tasks.
 
 ---
 
