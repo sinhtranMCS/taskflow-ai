@@ -16,6 +16,10 @@
 
 Screenshots below were captured in real API mode with MongoDB-backed data.
 
+### Login
+
+![Login](docs/screenshots/login.png)
+
 ### Dashboard
 
 ![Dashboard](docs/screenshots/dashboard.png)
@@ -31,10 +35,6 @@ Screenshots below were captured in real API mode with MongoDB-backed data.
 ### AI Assistant
 
 ![AI Assistant](docs/screenshots/ai.png)
-
-### Login
-
-![Login](docs/screenshots/login.png)
 
 Live demo: not deployed yet. Run locally with the Quick Start steps below.
 
