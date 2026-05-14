@@ -1,0 +1,45 @@
+{
+  "name": "taskflow-ai",
+  "version": "1.0.0",
+  "description": "TaskFlow AI - Intelligent Project Management Platform",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "test": "cd server && npm test",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "fullstack",
+    "project-management",
+    "ai",
+    "realtime",
+    "jwt",
+    "socket.io"
+  ],
+  "author": "Tran Truong Sinh <truongsinh1d@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sinhtranMCS/taskflow-ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sinhtranMCS/taskflow-ai/issues"
+  },
+  "homepage": "https://github.com/sinhtranMCS/taskflow-ai#readme"
+}
