@@ -16,17 +16,25 @@
 
 Screenshots below were captured in real API mode with MongoDB-backed data.
 
-| Dashboard | Kanban Board |
-| --- | --- |
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Kanban Board](docs/screenshots/board.png) |
+### Dashboard
 
-| Projects | AI Assistant |
-| --- | --- |
-| ![Projects](docs/screenshots/projects.png) | ![AI Assistant](docs/screenshots/ai.png) |
+![Dashboard](docs/screenshots/dashboard.png)
 
-| Login |
-| --- |
-| ![Login](docs/screenshots/login.png) |
+### Kanban Board
+
+![Kanban Board](docs/screenshots/board.png)
+
+### Projects
+
+![Projects](docs/screenshots/projects.png)
+
+### AI Assistant
+
+![AI Assistant](docs/screenshots/ai.png)
+
+### Login
+
+![Login](docs/screenshots/login.png)
 
 Live demo: not deployed yet. Run locally with the Quick Start steps below.
 
